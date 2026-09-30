@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="新增、完成、刪除及篩選任務。">
+  <title>My Task Manager</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%23194fc4%22%2F%3E%3Cpath%20d%3D%22m8%2016%205%205L24%2010%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E%0A" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js">
+</script>
+</head>
+<body>
+  <header class="topbar">
+<a class="brand" href="./index.html">
+<span class="brand-icon" aria-hidden="true">✓</span> TASKSPACE</a>
+<span class="top-caption">一件一件，完成每一天。</span>
+</header>
+  <main class="workspace">
+    <div class="heading">
+<div>
+<p class="eyebrow">我的工作空間</p>
+<h1>My Task Manager<span class="heading-dot">.</span>
+</h1>
+</div>
+<nav class="versions" aria-label="實作版本">
+<a class="current" aria-current="page" href="./index.html">JavaScript</a>
+<a href="./react.html">React</a>
+</nav>
+</div>
+    <div class="workspace-grid">
+      <div class="task-panel">
+        <section class="composer" aria-labelledby="add-heading">
+<h2 id="add-heading">下一件要完成的事</h2>
+<form id="task-form" novalidate>
+<label for="task-input">新增任務</label>
+<div class="input-row">
+<input id="task-input" name="task" type="text" placeholder="輸入任務名稱…" autocomplete="off" aria-describedby="message">
+<button class="add-button" type="submit">
+<span aria-hidden="true">＋</span> 新增</button>
+</div>
+<p id="message" class="message" role="status" aria-live="polite">
+</p>
+</form>
+</section>
+        <!-- 最重要的語意區域：section 定義任務清單區，ul/li 表達清單與個別任務。 -->
+        <section class="list-section" aria-labelledby="list-heading">
+<div class="list-top">
+<h2 id="list-heading">任務清單</h2>
+<span id="visible-count" class="subtle">
+</span>
+</div>
+<div class="filters" role="group" aria-label="篩選任務">
+<button type="button" data-filter="all" aria-pressed="true">全部 <span data-count="total">3</span>
+</button>
+<button type="button" data-filter="active" aria-pressed="false">未完成 <span data-count="active">2</span>
+</button>
+<button type="button" data-filter="completed" aria-pressed="false">已完成 <span data-count="completed">1</span>
+</button>
+</div>
+<ul id="task-list" class="task-list">
+</ul>
+<div id="empty-state" class="empty-state" hidden>
+<span aria-hidden="true">✓</span>
+<h3>這裡還沒有任務</h3>
+<p>新增一項任務，從一件小事開始。</p>
+</div>
+</section>
+        <footer id="task-stats" class="task-stats" aria-live="polite">
+</footer>
+      </div>
+      <aside class="overview" aria-labelledby="overview-heading">
+<p class="eyebrow">一步一步，向前</p>
+<h2 id="overview-heading">每個完成，都算數。</h2>
+<div class="progress-ring" id="progress-ring">
+<div>
+<strong id="percentage">33<span>%</span>
+</strong>
+<span class="ring-caption">完成進度</span>
+</div>
+</div>
+<dl class="overview-counts">
+<div>
+<dt>
+<i class="legend active">
+</i>待完成</dt>
+<dd data-count="active">2</dd>
+</div>
+<div>
+<dt>
+<i class="legend done">
+</i>已完成</dt>
+<dd data-count="completed">1</dd>
+</div>
+</dl>
+<p class="overview-note">專注眼前的一件事。<br>完成後，記得為自己打個勾。</p>
+</aside>
+    </div>
+    <div class="page-footer">
+<span>MY TASK MANAGER</span>
+<p>任務僅保留於本次使用，重新整理會回到示範資料。</p>
+</div>
+  </main>
+</body>
+</html>
