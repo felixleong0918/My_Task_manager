@@ -7,7 +7,7 @@ const initialTasks = () => [
 ];
 function addTask(tasks, title, id = String(nextTaskId++)) {
   const trimmed = title.trim();
-  if (!trimmed) throw new Error('請先輸入任務名稱。');
+  if (!trimmed) throw new Error('請輸入任務。');
   return [...tasks, { id, title: trimmed, completed: false }];
 }
 const toggleTask = (tasks, id) => tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
@@ -32,7 +32,7 @@ form.addEventListener('submit', event => {
     currentFilter = 'all';
     input.value = '';
     input.removeAttribute('aria-invalid');
-    message.textContent = '已新增任務。';
+    message.textContent = '已新增。';
     message.classList.remove('error');
     render(); // 3. 更新清單、篩選狀態與統計。
   } catch (error) {
@@ -61,7 +61,7 @@ function render() {
     checkbox.checked = task.completed;
     checkbox.addEventListener('change', () => {
       tasks = toggleTask(tasks, task.id);
-      announce(task.completed ? '已恢復為未完成。' : '已完成一項任務。');
+      announce(task.completed ? '未完成。' : '已完成。');
       render();
       const next = list.querySelector(`[data-task-id="${task.id}"] input`) || document.querySelector(`[data-filter="${currentFilter}"]`);
       next?.focus();
@@ -77,7 +77,7 @@ function render() {
     remove.addEventListener('click', () => {
       const index = [...list.children].indexOf(item);
       tasks = deleteTask(tasks, task.id);
-      announce('已刪除任務。');
+      announce('已刪除。');
       render();
       (list.children[Math.min(index, list.children.length - 1)]?.querySelector('.delete-button') || input).focus();
     });
@@ -86,8 +86,8 @@ function render() {
     list.append(item);
   });
   document.querySelector('#empty-state').hidden = visible.length !== 0;
-  document.querySelector('#empty-state h3').textContent = tasks.length ? '目前沒有符合的任務' : '這裡還沒有任務';
-  document.querySelector('#empty-state p').textContent = tasks.length ? '切換篩選，看看其他任務。' : '新增一項任務，從一件小事開始。';
+  document.querySelector('#empty-state h3').textContent = tasks.length ? '沒有符合的任務' : '沒有任務';
+  document.querySelector('#empty-state p').textContent = '';
   document.querySelector('#visible-count').textContent = `${visible.length} 項任務`;
   document.querySelectorAll('[data-count]').forEach(el => { el.textContent = counts[el.dataset.count]; });
   document.querySelectorAll('[data-filter]').forEach(button => { button.setAttribute('aria-pressed', String(button.dataset.filter === currentFilter)); });
